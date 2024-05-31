@@ -111,6 +111,7 @@ def main():
                 st.success("Done")
 
     def get_category(category):
+        st.session_state['category'] = category
         st.write(category)
         return category
 
@@ -124,6 +125,9 @@ def main():
 
     # Chat input
     # Placeholder for chat messages
+
+    if 'category' not in st.session_state:
+        st.session_state['category'] = None
 
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [
@@ -142,7 +146,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                category = get_category()
+                category = st.session_state['category']
                 response = user_input(user_question=prompt, category=category) #TODO Please specify the category here
                 placeholder = st.empty()
                 full_response = ''
