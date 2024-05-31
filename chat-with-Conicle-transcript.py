@@ -136,7 +136,15 @@ def main():
     st.sidebar.button('Data Science', on_click=get_category, args=('Data Science',))
 
     # Main content area for displaying chat messages
-    st.title("AI Team Chatbot")
+    st.markdown(
+        """
+        <h1>
+            <img src="./Sorc-Ai.png" alt="icon" style="width:50px;height:50px;margin-right:10px;">
+            AI Team Chatbot
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )
     st.write("อยากสอนมากๆค่ะ")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
