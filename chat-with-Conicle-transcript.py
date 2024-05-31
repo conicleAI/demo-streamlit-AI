@@ -12,6 +12,7 @@ from io import StringIO
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from google.oauth2 import service_account
 from PIL import Image
+import base64
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
 )
@@ -137,16 +138,17 @@ def main():
 
     # Main content area for displaying chat messages
     # Load the image
-    image = Image.open('Sorc-Ai.png')
+    image_path = 'icon.png'
+    img_base64 = get_image_as_base64(image_path)
 
     # Display the image next to the title
     st.markdown(
-        """
-        <div style="display: flex; align-items: center;">
-            <img src="data:image/png;base64,{}" style="width:50px;height:50px;margin-right:10px;">
-            <h1 style="display:inline;">AI Team Chatbot</h1>
-        </div>
-        """.format(st.image(image, use_column_width=False)),
+        f"""
+            <div style="display: flex; align-items: center;">
+                <img src="data:image/png;base64,{img_base64}" style="width:50px;height:50px;margin-right:10px;">
+                <h1 style="display:inline;">AI Team Chatbot</h1>
+            </div>
+            """,
         unsafe_allow_html=True
     )
     st.write("อยากสอนมากๆค่ะ")
