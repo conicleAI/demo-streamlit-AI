@@ -141,7 +141,7 @@ def main():
 
     # Main content area for displaying chat messages
     # Load the image
-    image_path = 'icon.png'
+    image_path = 'Sorc-Ai.png'
     img_base64 = get_image_as_base64(image_path)
 
     # Display the image next to the title
