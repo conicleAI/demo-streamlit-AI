@@ -111,6 +111,7 @@ def main():
                 st.success("Done")
 
     def category(category):
+        st.write(category)
         return category
 
     st.sidebar.button('Finance', on_click=category, args=('Finance',))
