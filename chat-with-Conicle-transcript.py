@@ -18,6 +18,9 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
+def get_image_as_base64(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode("utf-8")
 def create_vector_database(category=None):
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001")
