@@ -138,6 +138,7 @@ def main():
 
     st.sidebar.button('Finance', on_click=get_category, args=('Finance',))
     st.sidebar.button('Data Science', on_click=get_category, args=('Data Science',))
+    st.sidebar.button('ConicleSpace-Grow', on_click=get_category, args=('ConicleSpace-Grow',))
 
     # Main content area for displaying chat messages
     # Load the image
