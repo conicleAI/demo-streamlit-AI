@@ -110,6 +110,12 @@ def main():
                 create_vector_database(category='Finance')
                 st.success("Done")
 
+    def category(category):
+        return category
+
+    st.sidebar.button('Finance', on_click=category, args=('Finance',))
+    st.sidebar.button('Data Science', on_click=category, args=('Data Science',))
+
     # Main content area for displaying chat messages
     st.title("Punny AI Chatbot")
     st.write("อยากคุย!")
@@ -135,7 +141,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                response = user_input(user_question=prompt, category='Finance') #TODO Please specify the category here
+                response = user_input(user_question=prompt, category=category()) #TODO Please specify the category here
                 placeholder = st.empty()
                 full_response = ''
                 for item in response:
