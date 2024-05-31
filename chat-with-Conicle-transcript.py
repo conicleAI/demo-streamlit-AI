@@ -85,7 +85,7 @@ def clear_chat_history():
 
 def main():
     st.set_page_config(
-        page_title="Conicle Punny Chatbot",
+        page_title="Conicle Dos Chatbot",
         page_icon="🤖"
     )
 
@@ -119,7 +119,7 @@ def main():
     st.sidebar.button('Data Science', on_click=get_category, args=('Data Science',))
 
     # Main content area for displaying chat messages
-    st.title("Punny AI Chatbot")
+    st.title("AI Team Chatbot")
     st.write("อยากคุย!")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
