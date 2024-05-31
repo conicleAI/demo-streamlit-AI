@@ -11,7 +11,7 @@ from langchain.vectorstores import LanceDB
 from io import StringIO
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from google.oauth2 import service_account
-
+from PIL import Image
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
 )
@@ -136,13 +136,17 @@ def main():
     st.sidebar.button('Data Science', on_click=get_category, args=('Data Science',))
 
     # Main content area for displaying chat messages
+    # Load the image
+    image = Image.open('Sorc-Ai.png')
+
+    # Display the image next to the title
     st.markdown(
         """
-        <h1>
-            <img src="./Sorc-Ai.png" alt="icon" style="width:50px;height:50px;margin-right:10px;">
-            AI Team Chatbot
-        </h1>
-        """,
+        <div style="display: flex; align-items: center;">
+            <img src="data:image/png;base64,{}" style="width:50px;height:50px;margin-right:10px;">
+            <h1 style="display:inline;">AI Team Chatbot</h1>
+        </div>
+        """.format(st.image(image, use_column_width=False)),
         unsafe_allow_html=True
     )
     st.write("อยากสอนมากๆค่ะ")
