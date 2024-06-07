@@ -151,12 +151,12 @@ def main():
         f"""
             <div style="display: flex; align-items: center;">
                 <img src="data:image/png;base64,{img_base64}" style="width:50px;height:50px;margin-right:10px;">
-                <h1 style="display:inline;">AI Team Chatbot</h1>
+                <h1 style="display:inline;">Brae V8.1a</h1>
             </div>
             """,
         unsafe_allow_html=True
     )
-    st.write("อยากสอนมากๆค่ะ")
+    st.write("Conicle's Bare V8.1a")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
     # Chat input
@@ -167,7 +167,7 @@ def main():
 
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [
-            {"role": "assistant", "content": "เริ่มแชทกับ Conicle AI ได้เลย!"}]
+            {"role": "assistant", "content": "มีอะไรให้หนูช่วยไมค่ะ?"}]
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
