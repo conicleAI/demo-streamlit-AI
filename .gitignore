@@ -1,1 +1,3 @@
 chat-with-pdf.py
+.DS_Store
+configs/conicle-ai.json
