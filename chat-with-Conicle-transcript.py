@@ -24,7 +24,7 @@ def user_input(user_question, category=None):
     doc = vector_store.similarity_search(user_question, k=4)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
-    response = get_conversational_chain(prompt)
+    response = get_conversational_chain(prompt, credentials, 'configs/llm_settings.yaml')
     return response
 
 
