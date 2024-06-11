@@ -22,17 +22,6 @@ def create_vector_database(category=None):
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001")
     db = lancedb.connect("/tmp/lancedb")
-    table = db.create_table(
-        "my_table",
-        data=[
-            {
-                "vector": embeddings.embed_query("Hello World"),
-                "text": "Hello World",
-                "id": "1",
-            }
-        ],
-        mode="overwrite",
-    )
 
     # Load the document, split it into chunks, embed each chunk and load it into the vector store.
     doc_list = []
@@ -43,22 +32,31 @@ def create_vector_database(category=None):
         path = dl_dir + f'{category}/' + '**/*.txt'
         for file in glob.glob(path, recursive=True):
             with open(file) as f:
-                print(file)
-                doc_list.append(f.read())
+                temp = f.read()
+                doc_list.append(temp)
+
     else:
         print("ALL CATEGORY CASE")
         path = dl_dir + '**/*.txt'
         for file in glob.glob(path, recursive=True):
             with open(file) as f:
-                doc_list.append(f.read())
+                temp = f.read()
+                doc_list.append(temp)
 
     text_splitter = CharacterTextSplitter(separator=',', chunk_size=100000, chunk_overlap=1000)
     documents = text_splitter.create_documents(doc_list)
+    print(documents)
     vector_store = LanceDB.from_documents(documents, embeddings, connection=db)
-    tbl = db.open_table("my_table")
-    print(tbl)
-    print(db["my_table"].head())
-    print(db["my_table"].head(10))
+    print(db.table_names())
+    tbl = db.open_table("vectorstore")
+    table = db["vectorstore"]  # Replace "my_table" with your table name
+
+    # Get the table schema
+    arrow_table = table.to_arrow()
+
+# Print column lengths
+    for i, column in enumerate(arrow_table.schema.names):
+        print(f"Column '{column}': {len(arrow_table[:, i])}")
 
     return vector_store
 
