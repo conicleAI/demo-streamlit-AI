@@ -1,3 +1,4 @@
+from pathlib import Path
 from oauth2client.service_account import ServiceAccountCredentials
 from gcloud import storage
 
@@ -18,8 +19,12 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 storage_client = storage.Client(credentials=credentials, project='conicle-ai')
 bucket = storage_client.get_bucket(TRANSCRIPT_BUCKET_NAME)
 blobs = bucket.list_blobs(prefix=prefix)  # Get list of files
-print(blobs)
 for blob in blobs:
-    print(blob)
-    filename = blob.name.replace('/', '_')
-    blob.download_to_filename(dl_dir + filename)  # Download
+
+    if blob.name.endswith("/"):
+        continue
+    file_split = blob.name.split("/")
+    directory = "/".join(file_split[0:-1])
+    directory = directory.replace(prefix, dl_dir)
+    Path(directory).mkdir(parents=True, exist_ok=True)
+    blob.download_to_filename(blob.name.replace(prefix, dl_dir))
