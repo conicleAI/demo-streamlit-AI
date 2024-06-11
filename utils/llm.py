@@ -24,6 +24,13 @@ def create_vector_database(category=None):
     db = lancedb.connect("/tmp/lancedb")
     table = db.create_table(
         "my_table",
+        data=[
+            {
+                "vector": embeddings.embed_query("Hello World"),
+                "text": "Hello World",
+                "id": "1",
+            }
+        ],
         mode="overwrite",
     )
 
@@ -50,6 +57,7 @@ def create_vector_database(category=None):
     vector_store = LanceDB.from_documents(documents, embeddings, connection=db)
     tbl = db.open_table("my_table")
     print(tbl)
+    print(db["my_table"].head())
     print(db["my_table"].head(10))
 
     return vector_store
