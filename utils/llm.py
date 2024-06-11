@@ -24,35 +24,33 @@ def create_vector_database(category=None):
     db = lancedb.connect("/tmp/lancedb")
     table = db.create_table(
         "my_table",
-        data=[
-            {
-                "vector": embeddings.embed_query("Hello World"),
-                "text": "Hello World",
-                "id": "1",
-            }
-        ],
         mode="overwrite",
     )
 
     # Load the document, split it into chunks, embed each chunk and load it into the vector store.
     doc_list = []
     dl_dir = 'transcripts/'
+
     if category is not None:
         print("CATEGORY CASE")
-        for file in glob.glob(dl_dir + f'{category}/' + "/*.txt"):
+        path = dl_dir + f'{category}/' + '**/*.txt'
+        for file in glob.glob(path, recursive=True):
             with open(file) as f:
+                print(file)
                 doc_list.append(f.read())
     else:
         print("ALL CATEGORY CASE")
-        for file in glob.glob(dl_dir + "/*.txt"):
+        path = dl_dir + '**/*.txt'
+        for file in glob.glob(path, recursive=True):
             with open(file) as f:
                 doc_list.append(f.read())
 
     text_splitter = CharacterTextSplitter(separator=',', chunk_size=100000, chunk_overlap=1000)
-    print(doc_list)
     documents = text_splitter.create_documents(doc_list)
-    print('doclist', doc_list)
-    vector_store = LanceDB.from_documents(documents, embeddings, connection=table)
+    vector_store = LanceDB.from_documents(documents, embeddings, connection=db)
+    tbl = db.open_table("my_table")
+    print(tbl)
+    print(db["my_table"].head(10))
 
     return vector_store
 

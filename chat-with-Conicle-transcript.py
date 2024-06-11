@@ -2,10 +2,7 @@ import os
 import streamlit as st
 import base64
 import google.generativeai as genai
-from dotenv import load_dotenv
-from io import StringIO
 from google.oauth2 import service_account
-from PIL import Image
 from utils.llm import create_vector_database, get_conversational_chain
 
 
