@@ -18,10 +18,13 @@ def download_from_bucket():
     blobs = bucket.list_blobs(prefix=prefix)  # Get list of files
     for blob in blobs:
 
-        if blob.name.endswith("/"):
-            continue
-        file_split = blob.name.split("/")
-        directory = "/".join(file_split[0:-1])
-        directory = directory.replace(prefix, dl_dir)
-        Path(directory).mkdir(parents=True, exist_ok=True)
-        blob.download_to_filename(blob.name.replace(prefix, dl_dir))
+        try:
+            if blob.name.endswith("/"):
+                continue
+            file_split = blob.name.split("/")
+            directory = "/".join(file_split[0:-1])
+            directory = directory.replace(prefix, dl_dir)
+            Path(directory).mkdir(parents=True, exist_ok=True)
+            blob.download_to_filename(blob.name.replace(prefix, dl_dir))
+
+        except Exception as e: print(e)
