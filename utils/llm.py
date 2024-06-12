@@ -62,7 +62,7 @@ def get_conversational_chain(prompt, credentials, setting_location):
     response = model.generate_content(
         [prompt]
     )
-    print(response)
+
     try:
         result = response.text
     except:

@@ -4,6 +4,7 @@ import base64
 import google.generativeai as genai
 from google.oauth2 import service_account
 from utils.llm import create_vector_database, get_conversational_chain
+from utils.connect_to_bucket import download_from_bucket
 
 
 credentials = service_account.Credentials.from_service_account_info(
@@ -16,8 +17,19 @@ def get_image_as_base64(image_path):
         return base64.b64encode(img_file.read()).decode("utf-8")
 
 
-def user_input(user_question, category=None):
+def ingest_data():
+    download_from_bucket()
+
+
+def initializing(category=None):
+
     vector_store = create_vector_database(category)
+
+    return vector_store
+
+
+def user_input(vector_store, user_question):
+
     doc = vector_store.similarity_search(user_question, k=4)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
@@ -41,25 +53,16 @@ def main():
         st.title("Menu:")
         # txt_file = st.file_uploader(
         #     "Upload your file(s) and Click on the Submit & Process Button", accept_multiple_files=False)
-        if st.button("ประมวลผล!"):
-            with st.spinner("Processing..."):
-                # stringio = StringIO(txt_file.getvalue().decode("utf-8"))
-                # raw_text = stringio.read()
 
-                # raw_text = ""
-                # for file in glob.glob(dl_dir + "/*.txt"):
-                #     print(file)
-                #
-                #     my_file = open(file)
-                #     raw_text += my_file.read()
-                # get_conversational_chain(prompt=)
-                # get_vector_store(text_chunks)
-                create_vector_database(category='Finance')
-                st.success("Done")
+    st.sidebar.button('Ingest Data', on_click=ingest_data)
 
     def get_category(category):
         st.session_state['category'] = category
         st.write(category)
+        print(category)
+        vector_store = initializing(category)
+        st.session_state['vector_store'] = vector_store
+
         return category
 
     st.sidebar.button('Finance', on_click=get_category, args=('Finance',))
@@ -108,8 +111,8 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                category = st.session_state['category']
-                response = user_input(user_question=prompt, category=category) #TODO Please specify the category here
+
+                response = user_input(vector_store=st.session_state['vector_store'], user_question=prompt)
                 placeholder = st.empty()
                 full_response = ''
                 for item in response:
