@@ -1,6 +1,6 @@
 import streamlit as st
 from pathlib import Path
-from google.oauth2 import service_account
+from oauth2client.service_account import ServiceAccountCredentials
 from gcloud import storage
 
 ######### TRANSCRIPT BUCKET #########
@@ -10,9 +10,11 @@ dl_dir = 'transcripts/'
 
 
 def download_from_bucket():
-    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
+
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"])
     storage_client = storage.Client(credentials=credentials, project='conicle-ai')
     bucket = storage_client.get_bucket(TRANSCRIPT_BUCKET_NAME)
+
     blobs = bucket.list_blobs(prefix=prefix)  # Get list of files
     for blob in blobs:
 
