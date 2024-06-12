@@ -135,14 +135,14 @@ jupyterlab_server==2.25.2
 keyring==24.3.1
 kiwisolver==1.4.5
 lancedb==0.6.13
-langchain==0.1.6
-langchain-community==0.0.19
+langchain==0.1.20
+langchain-community==0.0.38
 langchain-core==0.1.40
 langchain_chroma==0.1.1
 langchain-experimental==0.0.50
 langchain-google-genai==0.0.9
 langdetect==1.0.9
-langsmith==0.0.87
+langsmith==0.1.0
 Levenshtein==0.25.0
 lxml==5.1.0
 Markdown==3.5.2
