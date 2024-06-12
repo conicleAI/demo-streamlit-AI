@@ -1,1 +1,7 @@
-chat-with-pdf.py
+configs/conicle-ai.json
+.DS_Store
+.streamlit/secrets.toml
+.DS_Store
+utils/__pycache__/connect_to_bucket.cpython-311.pyc
+utils/__pycache__/llm.cpython-311.pyc
+.gitignore
