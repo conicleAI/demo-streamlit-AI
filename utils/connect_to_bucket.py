@@ -3,12 +3,6 @@ from pathlib import Path
 from google.oauth2 import service_account
 from gcloud import storage
 
-SERVICE_ACCOUNT_FILE = 'configs/conicle-ai.json'
-
-credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
-storage_client = storage.Client(credentials=credentials, project='conicle-ai')
-bucket = storage_client.get_bucket('conicle-ai-conicle-x-audio')
-
 ######### TRANSCRIPT BUCKET #########
 TRANSCRIPT_BUCKET_NAME = 'conicle-ai-conicle-x-transcripts'
 prefix = 'data/transcripts/'
