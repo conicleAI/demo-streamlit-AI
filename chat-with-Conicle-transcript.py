@@ -16,6 +16,7 @@ def get_image_as_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode("utf-8")
 
+
 def ingest_data():
     download_from_bucket()
 
@@ -32,7 +33,7 @@ def user_input(vector_store, user_question):
     doc = vector_store.similarity_search(user_question, k=4)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
-    response = get_conversational_chain(prompt)
+    response = get_conversational_chain(prompt, credentials, 'configs/llm_settings.yaml')
     return response
 
 
