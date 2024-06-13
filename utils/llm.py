@@ -35,15 +35,16 @@ def create_vector_database(location):
     # db = lancedb.connect("/tmp/lancedb")
 
     # Load the document, split it into chunks, embed each chunk and load it into the vector store.
-    doc_list = []
     dl_dir = 'transcripts/'
     category_list = read_configs(location)['category_list']
 
     for category in category_list:
+        doc_list = []
         print("CATEGORY CASE")
         path = dl_dir + f'{category}/' + '**/*.txt'
         print(path)
         for file in glob.glob(path, recursive=True):
+            print(file)
             with open(file) as f:
                 temp = f.read()
                 doc_list.append(temp)
