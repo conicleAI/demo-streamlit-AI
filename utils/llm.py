@@ -33,7 +33,7 @@ def create_vector_database(category):
 
     if category is not None:
         print("CATEGORY CASE")
-        path = dl_dir + f'{category}/' + '**/*.txt'
+        path = dl_dir + f'{category}/' + '*.txt'
         print(path)
         for file in glob.glob(path, recursive=True):
             with open(file) as f:
