@@ -114,6 +114,7 @@ def main():
             with st.spinner("Thinking..."):
                 category = st.session_state['category']
                 vector_store = initializing(category)
+                st.write(category)
                 if vector_store:
                     response = user_input(vector_store=vector_store, user_question=prompt)
                 else:
