@@ -3,8 +3,10 @@ import streamlit as st
 import base64
 import google.generativeai as genai
 from google.oauth2 import service_account
-from utils.llm import create_vector_database, get_conversational_chain
+from utils.llm import create_vector_database, get_conversational_chain, parse_category
 from utils.connect_to_bucket import download_from_bucket
+from langchain_community.vectorstores.chroma import Chroma
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 
 credentials = service_account.Credentials.from_service_account_info(
@@ -19,19 +21,19 @@ def get_image_as_base64(image_path):
 
 def ingest_data():
     download_from_bucket()
+    vector_store = create_vector_database('configs/llm_settings.yaml')
+    st.session_state['vector_store'] = vector_store
 
 
-def initializing(category):
+def user_input(vector_store, user_question, category):
 
-    vector_store = create_vector_database(category)
-
-    return vector_store
-
-
-def user_input(vector_store, user_question):
-    doc = vector_store.similarity_search(user_question, k=4)
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="models/embedding-001")
+    print(category)
+    vectordb = Chroma(persist_directory='vector_store', embedding_function=embeddings, collection_name=category)
+    print(vectordb._collection.count())
+    doc = vectordb.search(query=user_question, search_type='similarity', k=1)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
-
     response = get_conversational_chain(prompt, credentials, 'configs/llm_settings.yaml')
     return response
 
@@ -59,8 +61,6 @@ def main():
         st.session_state['category'] = category
         st.write(f"Selected category: {category}")
         print(category)
-        vector_store = initializing(category)
-        st.session_state['vector_store'] = vector_store
 
         return category
 
@@ -114,7 +114,8 @@ def main():
             with st.spinner("Thinking..."):
                 vector_store = st.session_state.get('vector_store')
                 if vector_store:
-                    response = user_input(vector_store=vector_store, user_question=prompt)
+                    category = parse_category(st.session_state.get('category'))
+                    response = user_input(vector_store=vector_store, user_question=prompt, category=category)
                 else:
                     response = "เลือกหัวข้อที่คุณจะถามก่อน"
                 placeholder = st.empty()
