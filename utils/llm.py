@@ -36,9 +36,10 @@ def create_vector_database(category):
         path = dl_dir + f'{category}/' + '**/*.txt'
         print(path)
         for file in glob.glob(path, recursive=True):
-            with open(file) as f:
-                temp = f.read()
-                doc_list.append(temp)
+            if category.lower() in file.lower():
+                with open(file) as f:
+                    temp = f.read()
+                    doc_list.append(temp)
 
     else:
         print("ALL CATEGORY CASE")
