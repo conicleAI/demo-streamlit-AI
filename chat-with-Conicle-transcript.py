@@ -25,7 +25,7 @@ def ingest_data():
     st.session_state['vector_store'] = vector_store
 
 
-def user_input(vector_store, user_question, category):
+def user_input(user_question, category):
 
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001")
@@ -113,11 +113,9 @@ def main():
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 category = st.session_state['category']
-                vector_store = initializing(category)
-                st.write(category)
-                if vector_store:
+                if category:
                     category = parse_category(st.session_state.get('category'))
-                    response = user_input(vector_store=vector_store, user_question=prompt, category=category)
+                    response = user_input(user_question=prompt, category=category)
                 else:
                     response = "เลือกหัวข้อที่คุณจะถามก่อน"
                 placeholder = st.empty()
