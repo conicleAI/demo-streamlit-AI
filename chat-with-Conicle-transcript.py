@@ -112,7 +112,9 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                vector_store = st.session_state.get('vector_store')
+                category = st.session_state['category']
+                vector_store = initializing(category)
+                st.write(category)
                 if vector_store:
                     category = parse_category(st.session_state.get('category'))
                     response = user_input(vector_store=vector_store, user_question=prompt, category=category)
