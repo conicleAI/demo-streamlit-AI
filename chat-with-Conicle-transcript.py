@@ -29,7 +29,7 @@ def initializing(category=None):
 
 
 def user_input(vector_store, user_question):
-
+    st.write(vector_store)
     doc = vector_store.similarity_search(user_question, k=4)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
