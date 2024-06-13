@@ -21,7 +21,7 @@ def ingest_data():
     download_from_bucket()
 
 
-def initializing(category=None):
+def initializing(category):
 
     vector_store = create_vector_database(category)
 

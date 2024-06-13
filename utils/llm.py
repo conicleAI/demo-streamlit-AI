@@ -22,7 +22,7 @@ def read_configs(location):
             print(exc)
 
 
-def create_vector_database(category=None):
+def create_vector_database(category):
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001")
     # db = lancedb.connect("/tmp/lancedb")
@@ -34,6 +34,7 @@ def create_vector_database(category=None):
     if category is not None:
         print("CATEGORY CASE")
         path = dl_dir + f'{category}/' + '**/*.txt'
+        print(path)
         for file in glob.glob(path, recursive=True):
             with open(file) as f:
                 temp = f.read()
