@@ -111,7 +111,7 @@ def main():
 
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [
-            {"role": "assistant", "content": "มีอะไรให้หนูช่วยไมค่ะ?"}]
+            {"role": "assistant", "content": "เลือกหัวข้อแล้วถามผมได้เลยครับ"}]
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
