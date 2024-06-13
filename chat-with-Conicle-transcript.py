@@ -30,6 +30,7 @@ def initializing(category):
 
 def user_input(vector_store, user_question):
     doc = vector_store.similarity_search(user_question, k=4)
+    st.write(doc)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
     response = get_conversational_chain(prompt, credentials, 'configs/llm_settings.yaml')
