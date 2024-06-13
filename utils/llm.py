@@ -40,14 +40,6 @@ def create_vector_database(category):
                 temp = f.read()
                 doc_list.append(temp)
 
-    else:
-        print("ALL CATEGORY CASE")
-        path = dl_dir + '**/*.txt'
-        for file in glob.glob(path, recursive=True):
-            with open(file) as f:
-                temp = f.read()
-                doc_list.append(temp)
-
     text_splitter = CharacterTextSplitter(separator=',', chunk_size=100000, chunk_overlap=1000)
     documents = text_splitter.create_documents(doc_list)
 
