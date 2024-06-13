@@ -29,7 +29,6 @@ def initializing(category=None):
 
 
 def user_input(vector_store, user_question):
-    st.write(vector_store)
     doc = vector_store.similarity_search(user_question, k=4)
     prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
 
@@ -58,7 +57,7 @@ def main():
 
     def get_category(category):
         st.session_state['category'] = category
-        st.write(category)
+        st.write(f"Selected category: {category}")
         print(category)
         vector_store = initializing(category)
         st.session_state['vector_store'] = vector_store
@@ -93,6 +92,8 @@ def main():
 
     if 'category' not in st.session_state:
         st.session_state['category'] = None
+        st.session_state['vector_store'] = None
+
 
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [
@@ -111,8 +112,11 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-
-                response = user_input(vector_store=st.session_state['vector_store'], user_question=prompt)
+                vector_store = st.session_state.get('vector_store')
+                if vector_store:
+                    response = user_input(vector_store=vector_store, user_question=prompt)
+                else:
+                    response = "เลือกหัวข้อที่คุณจะถามก่อน"
                 placeholder = st.empty()
                 full_response = ''
                 for item in response:
