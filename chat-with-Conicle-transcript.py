@@ -58,7 +58,7 @@ def main():
         # txt_file = st.file_uploader(
         #     "Upload your file(s) and Click on the Submit & Process Button", accept_multiple_files=False)
 
-    st.sidebar.button('Ingest Data', on_click=ingest_data)
+    st.sidebar.button('ห้ามกด', on_click=ingest_data)
 
     def get_category(category):
         st.session_state['category'] = category
