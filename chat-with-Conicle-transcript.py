@@ -106,12 +106,12 @@ def main():
         f"""
             <div style="display: flex; align-items: center;">
                 <img src="data:image/png;base64,{img_base64}" style="width:50px;height:50px;margin-right:10px;">
-                <h1 style="display:inline;">Brae V10a</h1>
+                <h1 style="display:inline;">(Experiment) Conicle's Brae V1b</h1>
             </div>
             """,
         unsafe_allow_html=True
     )
-    st.write("Conicle's Bare V10a")
+    #st.write("Conicle's Bare V10a")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
     # Chat input
