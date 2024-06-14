@@ -71,7 +71,7 @@ def main():
         st.sidebar.markdown("""
                             ## How to Use This Project (โปรเจคนี้ทำมาเพื่อการทดลอง experiment, fine-tuning system instruction เพื่อนำไปใช้ใน AI สืบไป)
                             0. เลือกหัวข้อด้านซ้ายมือ
-                            1. แล้วคุย-ปรึกษา-ถามได้เลย
+                            1. แล้วคุย-ปรึกษา-ถามได้เลย (ถามได้แค่ในหัวข้อที่กด)
                             2. **Clear Chat History**: Use the clear chat history button to reset the chat. (Reset บทสนทนา)
 
                             ### Features
