@@ -33,8 +33,8 @@ def user_input(user_question, category):
     vectordb = Chroma(persist_directory='vector_store', embedding_function=embeddings, collection_name=category)
     print(vectordb._collection.count())
     doc = vectordb.search(query=user_question, search_type='similarity', k=10)
-    prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
-    response = get_conversational_chain(prompt, credentials, 'configs/llm_settings.yaml')
+    # prompt = f"""Context:\n {doc}?\n Question: \n{user_question}\n"""
+    response = get_conversational_chain(context=doc, prompt=user_question, credentials=credentials, setting_location='configs/llm_settings.yaml')
     return response
 
 
