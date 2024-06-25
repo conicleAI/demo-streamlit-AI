@@ -111,7 +111,7 @@ def main():
             """,
         unsafe_allow_html=True
     )
-    st.write("Version 1.2a")
+    st.write("Version 2.1a")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
     # Chat input
