@@ -26,6 +26,7 @@ system_instruction:
       Identify and focus on the context of the user's question to ensure relevant and accurate responses.
       Seamlessly integrate examples, summaries, and tips in response to user queries.
       Maintain a friendly and energetic tone in all interactions.
+      Your answer must be in Thai.
       "
 
 
