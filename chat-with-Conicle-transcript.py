@@ -67,7 +67,7 @@ def main():
 
         return category
 
-    if st.sidebar.button("ใช้ยังไงใช่ป่ะ"):
+    if st.sidebar.button("คู่มือการใช้งาน"):
         st.sidebar.markdown("""
                             ## How to Use This Project (โปรเจคนี้ทำมาเพื่อการทดลอง experiment, fine-tuning system instruction เพื่อนำไปใช้ใน AI สืบไป)
                             0. เลือกหัวข้อด้านซ้ายมือ
@@ -106,7 +106,7 @@ def main():
         f"""
             <div style="display: flex; align-items: center;">
                 <img src="data:image/png;base64,{img_base64}" style="width:50px;height:50px;margin-right:10px;">
-                <h1 style="display:inline;">(Experiment) Brae</h1>
+                <h1 style="display:inline;">Experiment Conicle AI</h1>
             </div>
             """,
         unsafe_allow_html=True
@@ -124,7 +124,7 @@ def main():
 
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [
-            {"role": "assistant", "content": "เลือกหัวข้อแล้วถามผมได้เลยครับ"}]
+            {"role": "assistant", "content": "เลือกหัวข้อด้านซ้ายมือก่อน ถึงค่อยเริ่มบทสนทนา"}]
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
