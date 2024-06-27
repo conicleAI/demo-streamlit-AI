@@ -69,7 +69,9 @@ def main():
 
     if st.sidebar.button("คู่มือการใช้งาน"):
         st.sidebar.markdown("""
-                            ## How to Use This Project (โปรเจคนี้ทำมาเพื่อการทดลอง experiment, fine-tuning system instruction เพื่อนำไปใช้ใน AI สืบไป)
+                            Scenario: จำลองว่าคุณเป็นผู้ใช้งาน กำลังเรียน คอร์สที่เลือก แล้วระหว่างเรียน หรือหลังเรียน จะพิมพ์ถามอะไร อาจารย์
+                            
+                            ## (โปรเจคนี้ทำมาเพื่อการทดลอง experiment, fine-tuning เพื่อนำไปปรับปรุง Conicle AI)
                             0. เลือกหัวข้อด้านซ้ายมือ
                             1. แล้วคุย-ปรึกษา-ถามได้เลย (ถามได้แค่ในหัวข้อที่กด)
                             2. **Clear Chat History**: Use the clear chat history button to reset the chat. (Reset บทสนทนา)
@@ -87,6 +89,7 @@ def main():
     # st.sidebar.button('ConicleSpace-Grow (BETA)', on_click=get_category, args=('ConicleSpace-Grow',))
     # st.sidebar.button('Conicle Piece of Cake', on_click=get_category, args=('Piece_of_cake',))
     st.sidebar.button('ConicleX Course Cybersecurity Awareness', on_click=get_category, args=('course_123',))
+    st.sidebar.button('ConicleX [168] การประกันภัยรถยนต์ภาคสมัครใจ', on_click=get_category, args=('course_132',))
     st.sidebar.button('ConicleX The Mindset Makeover', on_click=get_category, args=('course_124',))
     st.sidebar.button('ConicleX How to Increase Your Confidence', on_click=get_category, args=('course_125',))
     st.sidebar.button('ConicleX Piece of Cake Good Communication', on_click=get_category, args=('course_126',))
@@ -106,12 +109,12 @@ def main():
         f"""
             <div style="display: flex; align-items: center;">
                 <img src="data:image/png;base64,{img_base64}" style="width:50px;height:50px;margin-right:10px;">
-                <h1 style="display:inline;">Conicle Generative AI</h1>
+                <h1 style="display:inline;">Coniverse AI</h1>
             </div>
             """,
         unsafe_allow_html=True
     )
-    st.write("Version 2.1a")
+    st.write("Version 2.2c")
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
     # Chat input
