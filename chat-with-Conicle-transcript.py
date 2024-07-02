@@ -89,7 +89,7 @@ def main():
     # st.sidebar.button('ConicleSpace-Grow (BETA)', on_click=get_category, args=('ConicleSpace-Grow',))
     # st.sidebar.button('Conicle Piece of Cake', on_click=get_category, args=('Piece_of_cake',))
     st.sidebar.button('ConicleX Course Cybersecurity Awareness', on_click=get_category, args=('course_123',))
-    st.sidebar.button('ConicleX [168] การประกันภัยรถยนต์ภาคสมัครใจ', on_click=get_category, args=('course_132',))
+    #st.sidebar.button('ConicleX [168] การประกันภัยรถยนต์ภาคสมัครใจ', on_click=get_category, args=('course_132',))
     st.sidebar.button('ConicleX The Mindset Makeover', on_click=get_category, args=('course_124',))
     st.sidebar.button('ConicleX How to Increase Your Confidence', on_click=get_category, args=('course_125',))
     st.sidebar.button('ConicleX Piece of Cake Good Communication', on_click=get_category, args=('course_126',))
