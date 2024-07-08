@@ -103,7 +103,7 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
-    st.write("Version 2.2c")
+    st.write("Version 3.2b")
 
     # Initialize session state
     if 'category' not in st.session_state:
