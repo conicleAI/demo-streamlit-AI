@@ -39,22 +39,25 @@ def create_vector_database(location):
     category_list = read_configs(location)['category_list']
 
     for category in category_list:
-        doc_list = []
-        print("CATEGORY CASE")
-        path = dl_dir + f'{category}/' + '**/*.txt'
-        print(path)
-        for file in glob.glob(path, recursive=True):
-            print(file)
-            with open(file) as f:
-                temp = f.read()
-                doc_list.append(temp)
-        text_splitter = CharacterTextSplitter(separator=',', chunk_size=100000, chunk_overlap=1000)
-        documents = text_splitter.create_documents(doc_list)
-        category = parse_category(category)
-        ids = [str(i) for i in range(1, len(doc_list) + 1)]
-        vector_store = Chroma.from_documents(documents, embeddings, ids=ids, collection_name=category, persist_directory='vector_store')
-        vector_store.persist()
+        try:
+            doc_list = []
+            print("CATEGORY CASE")
+            path = dl_dir + f'{category}/' + '**/*.txt'
+            print(path)
+            for file in glob.glob(path, recursive=True):
+                print(file)
+                with open(file) as f:
+                    temp = f.read()
+                    doc_list.append(temp)
+            text_splitter = CharacterTextSplitter(separator=',', chunk_size=100000, chunk_overlap=1000)
+            documents = text_splitter.create_documents(doc_list)
+            category = parse_category(category)
+            ids = [str(i) for i in range(1, len(doc_list) + 1)]
+            vector_store = Chroma.from_documents(documents, embeddings, ids=ids, collection_name=category, persist_directory='vector_store')
+            vector_store.persist()
 
+        except Exception as e:
+            print(e)
 
     return vector_store
 
