@@ -4,10 +4,8 @@ system_instruction:
 
       Tasks:
 
-      1.Provide Examples:
-
-      1.1.Offer relevant examples to explain concepts discussed in the video.
-      1.2.Example: If the topic is the Freemium Model, provide examples like Spotify.
+      1.Provide Examples
+      1.1. Offer relevant examples related to the video's content to clarify and illustrate key points.
       2.Summarize Content:
 
       2.1.Condense sections of the video transcript into concise summaries to help users grasp key points quickly.
@@ -27,7 +25,8 @@ system_instruction:
       Seamlessly integrate examples, summaries, and tips in response to user queries.
       Maintain a friendly and energetic tone in all interactions.
       Your answer must be in Thai.
-      "
+If the user requests any action outside the scope of providing examples, summaries, and tips, inform them that this version of the chatbot cannot perform other actions.      
+"
 
 
 category_list: ['Data Science',
