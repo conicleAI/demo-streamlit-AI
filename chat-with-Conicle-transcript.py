@@ -12,6 +12,9 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
+# Constants
+QUESTION_LIMIT = 3
+
 
 # Helper functions
 def get_image_as_base64(image_path):
@@ -38,6 +41,7 @@ def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "เริ่มแชทกับ Conicle AI ได้เลย!"}]
     st.session_state['conversation_history'] = []  # Clear the conversation history
     st.session_state['category'] = None
+    st.session_state['question_count'] = 0  # Reset the question count
 
 
 # Main application
@@ -99,7 +103,7 @@ def main():
         </div>
     """, unsafe_allow_html=True)
 
-    st.write("Version 3.1a")
+    st.write("Version 2.2c")
 
     # Initialize session state
     if 'category' not in st.session_state:
@@ -114,6 +118,9 @@ def main():
     if "conversation_history" not in st.session_state.keys():
         st.session_state['conversation_history'] = []
 
+    if "question_count" not in st.session_state.keys():
+        st.session_state['question_count'] = 0
+
     # Display chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -121,32 +128,38 @@ def main():
 
     # Chat input
     if prompt := st.chat_input():
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.write(prompt)
+        if st.session_state['question_count'] < QUESTION_LIMIT:
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.write(prompt)
 
-        if st.session_state.messages[-1]["role"] != "assistant":
-            with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    category = st.session_state['category']
-                    if category:
-                        category = parse_category(st.session_state.get('category'))
-                        st.session_state['conversation_history'].append(prompt)
-                        conversation_context = " ".join(st.session_state['conversation_history'])
-                        response = user_input(user_question=f"{conversation_context}\n{prompt}", category=category)
-                    else:
-                        response = "เลือกหัวข้อที่คุณจะถามก่อน"
-                    placeholder = st.empty()
-                    full_response = ''
-                    for item in response:
-                        full_response += item
+            if st.session_state.messages[-1]["role"] != "assistant":
+                with st.chat_message("assistant"):
+                    with st.spinner("Thinking..."):
+                        category = st.session_state['category']
+                        if category:
+                            category = parse_category(st.session_state.get('category'))
+                            st.session_state['conversation_history'].append(prompt)
+                            conversation_context = " ".join(st.session_state['conversation_history'])
+                            response = user_input(user_question=f"{conversation_context}\n{prompt}", category=category)
+                        else:
+                            response = "เลือกหัวข้อที่คุณจะถามก่อน"
+                        placeholder = st.empty()
+                        full_response = ''
+                        for item in response:
+                            full_response += item
+                            placeholder.markdown(full_response)
                         placeholder.markdown(full_response)
-                    placeholder.markdown(full_response)
 
-            if response:
-                message = {"role": "assistant", "content": full_response}
-                st.session_state.messages.append(message)
-                st.session_state['conversation_history'].append(full_response)
+                if response:
+                    message = {"role": "assistant", "content": full_response}
+                    st.session_state.messages.append(message)
+                    st.session_state['conversation_history'].append(full_response)
+                    st.session_state['question_count'] += 1
+        else:
+            st.session_state.messages.append({"role": "assistant", "content": "End of session. Subscribe for more."})
+            with st.chat_message("assistant"):
+                st.write("End of session. Subscribe for more.")
 
 
 if __name__ == "__main__":
