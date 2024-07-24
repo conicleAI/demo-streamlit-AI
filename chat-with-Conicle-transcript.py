@@ -32,7 +32,7 @@ def intent_recognize(prompt):
         with st.chat_message("user"):
 
             st.write(result["labels"][0])
-    
+
 
     return None
 
