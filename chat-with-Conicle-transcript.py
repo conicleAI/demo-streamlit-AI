@@ -23,10 +23,13 @@ def get_image_as_base64(image_path):
         return base64.b64encode(img_file.read()).decode("utf-8")
 
 def intent_recognize(prompt):
-
     INTENTS = ["gratitude", "summary"]
 
-    return
+    oracle = pipeline(model="facebook/bart-large-mnli")
+    print(oracle(prompt, candidate_labels=INTENTS))
+
+
+    return None
 
 def ingest_data():
     download_from_bucket()
@@ -134,8 +137,8 @@ def main():
 
     # Chat input
     if prompt := st.chat_input():
-
         if st.session_state['question_count'] < QUESTION_LIMIT:
+            intent_recognize(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.write(prompt)
