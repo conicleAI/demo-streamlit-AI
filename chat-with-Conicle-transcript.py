@@ -7,6 +7,7 @@ from utils.llm import create_vector_database, get_conversational_chain, parse_ca
 from utils.connect_to_bucket import download_from_bucket
 from langchain_community.vectorstores.chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from transformers import pipeline
 
 # Configure credentials
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
@@ -21,6 +22,11 @@ def get_image_as_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode("utf-8")
 
+def intent_recognize(prompt):
+
+    INTENTS = ["gratitude", "summary"]
+
+    return
 
 def ingest_data():
     download_from_bucket()
@@ -128,6 +134,7 @@ def main():
 
     # Chat input
     if prompt := st.chat_input():
+
         if st.session_state['question_count'] < QUESTION_LIMIT:
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
