@@ -25,7 +25,7 @@ def get_image_as_base64(image_path):
 def intent_recognize(prompt):
     INTENTS = ["gratitude", "summary"]
 
-    oracle = pipeline(model="facebook/bart-large-mnli")
+    oracle = pipeline("zero-shot-classification")
     result = oracle(prompt, candidate_labels=INTENTS)
 
     if(result["score"][0] > 0.5):
