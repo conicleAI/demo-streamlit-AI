@@ -24,14 +24,13 @@ def get_image_as_base64(image_path):
 
 def intent_recognize(prompt):
     INTENTS = ["gratitude", "summary"]
-    import pytorch_pretrained_bert as ppb
-    oracle = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-    result = oracle(prompt, candidate_labels=INTENTS)
+    #oracle = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+    #result = oracle(prompt, candidate_labels=INTENTS)
 
-    if(result["score"][0] > 0.5):
-        with st.chat_message("user"):
+    #if(result["score"][0] > 0.5):
+    #    with st.chat_message("user"):
 
-            st.write(result["labels"][0])
+    #        st.write(result["labels"][0])
 
 
     return None

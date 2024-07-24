@@ -44,7 +44,6 @@ docstring_parser==0.16
 docutils==0.20.1
 python-dotenv
 torch
-pytorch-pretrained-bert
 elastic-transport==8.12.0
 elasticsearch==8.12.1
 entrypoints==0.4
