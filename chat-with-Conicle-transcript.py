@@ -26,8 +26,13 @@ def intent_recognize(prompt):
     INTENTS = ["gratitude", "summary"]
 
     oracle = pipeline(model="facebook/bart-large-mnli")
-    print(oracle(prompt, candidate_labels=INTENTS))
+    result = oracle(prompt, candidate_labels=INTENTS)
 
+    if(result["score"][0] > 0.5):
+        with st.chat_message("user"):
+
+            st.write(result["labels"][0])
+    
 
     return None
 
