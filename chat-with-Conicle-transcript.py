@@ -25,7 +25,6 @@ def get_image_as_base64(image_path):
 def intent_recognize(prompt):
     INTENTS = ["gratitude", "summary"]
     import pytorch_pretrained_bert as ppb
-    assert 'bert-large-cased' in ppb.modeling.PRETRAINED_MODEL_ARCHIVE_MAP
     oracle = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
     result = oracle(prompt, candidate_labels=INTENTS)
 
