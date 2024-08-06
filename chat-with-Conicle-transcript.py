@@ -23,8 +23,8 @@ def get_image_as_base64(image_path):
         return base64.b64encode(img_file.read()).decode("utf-8")
 
 def intent_recognize(prompt):
-    INTENTS = ["gratitude", "summary"]
-    oracle = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+    #INTENTS = ["gratitude", "summary"]
+    #oracle = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
     #result = oracle(prompt, candidate_labels=INTENTS)
 
     #if(result["score"][0] > 0.5):
