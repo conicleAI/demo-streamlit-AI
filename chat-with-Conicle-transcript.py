@@ -87,17 +87,15 @@ def main():
 
         # Category buttons
         categories = {
-            'Finance': 'ConicleX Course IC Plain-Paper 1 Exam Preparation: Make It Easy with Mind Map ตอนที่ 2',
-            'Data Science': 'ConicleX Course Mastering Prompt Engineering Design for ChatGPT AI Part 2',
-            'course_123': 'ConicleX Course Cybersecurity Awareness',
-            'course_124': 'ConicleX The Mindset Makeover',
-            'course_125': 'ConicleX How to Increase Your Confidence',
-            'course_126': 'ConicleX Piece of Cake Good Communication',
-            'course_127': 'ConicleX Piece of Cake Happy Workplace',
-            'course_128': 'ConicleX Piece of Cake ISO',
-            'course_129': 'ConicleX Piece of Cake Strategic Thinking',
-            'course_130': 'ConicleX Piece of Cake คู่มือผู้จัดการพันธุ์ใหม่',
-            'course_131': 'ConicleX Piece of Cake เพิ่มยอดขาย'
+            'coniclex_1254': 'ภาษาอังกฤษสำหรับงานทรัพยากรบุคคล (English for HR)',
+            'coniclex_1290': 'ปลดล็อกยอดขาย ทะยาน 10 เท่า (Unlock 10x Sales Success)',
+            'coniclex_1291': 'สุดยอดเทคนิคการขายสินค้าเพื่อปิดการขายภายใน 10 นาที (Techniques To Close the Sale within 10 Minutes)',
+            'coniclex_1292': 'กลยุทธ์บริหารความสัมพันธ์ลูกค้า สร้างประสบการณ์เชิงบวก (Customer Relationship Management Strategy into Action)',
+            'coniclex_1339': 'ความลับของนักปิดการขาย รายได้ 10 เท่า (The Secret of 10x Consultative Sales Closure)',
+            'coniclex_1342': 'กลยุทธ์ราคาโดนใจให้อยากซื้อ (Pricing Strategies)',
+            'coniclex_1455': 'รู้ให้ทันด้านความมั่นคงทางไซเบอร์ (Cybersecurity Awareness)',
+            'coniclex_1479': '6 กระบวนการคิดด้วยสมององค์รวม เพื่อพัฒนาองค์กร (Ultimate Thinking for Organization Development)',
+
         }
 
         for key, value in categories.items():

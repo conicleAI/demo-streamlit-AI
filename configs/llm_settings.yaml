@@ -29,17 +29,12 @@ If the user requests any action outside the scope of providing examples, summari
 "
 
 
-category_list: ['Data Science',
-                'Finance',
-                'Piece of Cake',
-                'course_123',
-                'course_124',
-                'course_125',
-                'course_126',
-                'course_127',
-                'course_128',
-                'course_129',
-                'course_130',
-                'course_131',
-                'course_132'
+category_list: ['coniclex_1254',
+                'coniclex_1290',
+                'coniclex_1291',
+                'coniclex_1292',
+                'coniclex_1339',
+                'coniclex_1342',
+                'coniclex_1455',
+                'coniclex_1479',
 ]
