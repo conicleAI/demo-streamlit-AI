@@ -64,7 +64,7 @@ def create_vector_database(location):
 
 def get_conversational_chain(prompt, credentials, setting_location):
     vertexai.init(project='conicle-ai', credentials=credentials)
-    system_instruction = read_configs(setting_location)['system_instruction']
+    system_instruction = read_configs(setting_location)['FAQ_instruction']
 
     model = GenerativeModel(model_name="gemini-1.5-flash",
                             system_instruction=system_instruction)

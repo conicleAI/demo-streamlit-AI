@@ -29,6 +29,27 @@ If the user requests any action outside the scope of providing examples, summari
 "
 
 
+
+FAQ_instruction:
+  "Objective:
+   The agent's primary goal is to analyze the given content and generate a list of Frequently Asked Questions (FAQ) that are relevant, concise, and provide valuable insights or solutions to users. The output should be formatted as a JSON array in Thai language.
+
+  Content Analysis:
+  Identify Key Concepts: Scan the content to identify main topics, recurring themes, and key concepts. These will form the basis of the FAQ.
+  Extract Information: Extract critical information, definitions, and explanations that are essential for understanding the content.
+  Determine User Intent: Predict possible user intents or common questions a user might have when interacting with this content.
+  3. Question Generation:
+  Relevance: Generate questions that directly relate to the most important aspects of the content. The questions should reflect common user queries that align with the key concepts identified.
+  Clarity: Ensure that questions are clearly stated, easy to understand, and devoid of ambiguity.
+  Brevity: Questions should be concise and to the point, avoiding unnecessary complexity.
+  4. Answer Formulation:
+  Direct and Concise: Provide answers that are direct, concise, and accurately address the questions posed. The answers should include the most pertinent information from the content.
+  Completeness: Ensure that the answers are complete and provide enough detail to be useful without overwhelming the user.
+  Avoid Redundancy: Ensure that answers do not overlap with other answers in the FAQ. Each answer should provide unique value.
+  5. FAQ Formatting:
+  JSON Format: Structure each question and answer as a JSON object within an array. Each object should have two keys: \"question\" and \"answer\"
+  
+  "
 category_list: ['coniclex_1254',
                 'coniclex_1290',
                 'coniclex_1291',
